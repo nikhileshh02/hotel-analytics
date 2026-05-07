@@ -11,7 +11,9 @@ create table dim_rooms
 
 SET global local_infile = ON;
 
-LOAD DATA LOCAL INFILE 'N:/data_powerbi&sqldata/data/dim_rooms.csv'
+TRUNCATE TABLE dim_date;
+
+LOAD DATA LOCAL INFILE 'your_path/dim_rooms.csv'
 into table dim_rooms
 fields terminated by ','
 OPTIONALLY ENCLOSED BY '"'
@@ -31,7 +33,7 @@ create table dim_hotels
 
 SET global local_infile = ON;
 
-LOAD DATA LOCAL INFILE 'N:/data_powerbi&sqldata/data/dim_hotels.csv'
+LOAD DATA LOCAL INFILE 'your_path/dim_hotels.csv'
 into table dim_hotels
 fields terminated by ','
 OPTIONALLY ENCLOSED BY '"'
@@ -53,7 +55,7 @@ create table dim_date
 
 SET global local_infile = ON;
 
-LOAD DATA LOCAL INFILE 'N:/data_powerbi&sqldata/data/dim_date.csv'
+LOAD DATA LOCAL INFILE 'your_path/dim_date.csv'
 into table dim_date
 fields terminated by ','
 OPTIONALLY ENCLOSED BY '"'
@@ -85,7 +87,7 @@ CREATE TABLE fact_bookings
 
 SET global local_infile = ON;
 
-LOAD DATA LOCAL INFILE 'N:/data_powerbi&sqldata/data/fact_bookings.csv'
+LOAD DATA LOCAL INFILE 'your_path/fact_bookings.csv'
 into table fact_bookings
 fields terminated by ','
 OPTIONALLY ENCLOSED BY '"'
@@ -110,7 +112,7 @@ create table fact_aggregated_bookings
 
 SET global local_infile = ON;
 
-LOAD DATA LOCAL INFILE 'N:/data_powerbi&sqldata/data/fact_aggregated_bookings.csv'
+LOAD DATA LOCAL INFILE 'your_path/fact_aggregated_bookings.csv'
 into table fact_aggregated_bookings
 fields terminated by ','
 OPTIONALLY ENCLOSED BY '"'
