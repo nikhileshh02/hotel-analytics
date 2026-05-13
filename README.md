@@ -23,13 +23,13 @@ An end-to-end hospitality analytics project built on AtliQ Hotels data covering 
 
 ## 📁 Repository Structure
 hotel-analytics/
-├── hotel_analytics.sql          # MySQL queries & schema
-├── fact_bookings.csv            # 1,34,590 booking records
+├── hotel_analytics.sql           # MySQL queries & schema
+├── fact_bookings.csv             # 1,34,590 booking records
 ├── fact_aggregated_bookings.csv
-├── dim_hotels.csv               # 25 properties
-├── dim_rooms.csv                # 4 room types
-├── dim_date.csv                 # 92 days (May–Jul 2022)
-├── hotel_dashboard.pbix         # Power BI dashboard
+├── dim_hotels.csv                # 25 properties
+├── dim_rooms.csv                 # 4 room types
+├── dim_date.csv                  # 92 days (May–Jul 2022)
+├── hotel_dashboard.pbix          # Power BI dashboard
 └── README.md
 
 ---
@@ -46,7 +46,6 @@ hotel-analytics/
 | Cancellation Rate | 24.84% |
 | DSRN | 2,501 |
 
-**Weekends vs Weekdays:**
 | | RevPAR | Occupancy % | ADR |
 |--|--|--|--|
 | Weekends | 7,972 | 62.64% | 12,725 |
@@ -56,9 +55,9 @@ hotel-analytics/
 
 ## 🏗️ Data Model — Star Schema
 fact_bookings (134K rows)
-├── dim_hotels        (property_id → 25 hotels, 4 cities)
-├── dim_rooms         (room_id → 4 room types)
-└── dim_date          (check_in_date → 92 days)
+├── dim_hotels     (property_id → 25 hotels, 4 cities)
+├── dim_rooms      (room_id → 4 room types)
+└── dim_date       (check_in_date → 92 days)
 fact_aggregated_bookings
 ├── dim_hotels
 ├── dim_rooms
@@ -69,19 +68,14 @@ fact_aggregated_bookings
 ## 🧮 Key DAX Measures
 
 ```dax
-Revenue = SUM(fact_bookings[revenue_realized])
-
-RevPAR = DIVIDE([Revenue], [DSRN])
-
-ADR = DIVIDE([Revenue], [Total Bookings])
-
-Occupancy % = DIVIDE([DURN], [DSRN])
-
+Revenue       = SUM(fact_bookings[revenue_realized])
+RevPAR        = DIVIDE([Revenue], [DSRN])
+ADR           = DIVIDE([Revenue], [Total Bookings])
+Occupancy %   = DIVIDE([DURN], [DSRN])
 Realisation % = DIVIDE([DURN], [DBRN])
+Cancellation% = DIVIDE([Cancelled Bookings], [Total Bookings])
 
-Cancellation % = DIVIDE([Cancelled Bookings], [Total Bookings])
-
-WoW Revenue % = 
+WoW Revenue % =
 DIVIDE(
     [Revenue] - CALCULATE([Revenue], DATEADD(dim_date[date], -7, DAY)),
     CALCULATE([Revenue], DATEADD(dim_date[date], -7, DAY))
